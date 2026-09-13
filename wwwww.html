@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web开发实践报告 - 红色信仰主题网页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f2f5;
+            font-family: "宋体", "SimSun", "Times New Roman", serif;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .report-wrapper {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 50px 60px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        /* 报告内容样式 */
+        .report-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #1a1a1a;
+        }
+        .report-content h1 {
+            font-size: 26px;
+            text-align: center;
+            font-weight: bold;
+            margin: 30px 0 16px 0;
+            font-family: "黑体", "SimHei", sans-serif;
+            letter-spacing: 2px;
+        }
+        .report-content h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 28px 0 12px 0;
+            font-family: "黑体", "SimHei", sans-serif;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 6px;
+        }
+        .report-content h3 {
+            font-size: 17px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            font-family: "黑体", "SimHei", sans-serif;
+        }
+        .report-content p {
+            margin: 8px 0;
+            text-align: justify;
+            text-indent: 2em;
+        }
+        .report-content p.no-indent {
+            text-indent: 0;
+        }
+        .report-content ul, .report-content ol {
+            margin: 8px 0 8px 2em;
+            padding-left: 1.5em;
+        }
+        .report-content li {
+            margin: 4px 0;
+            text-align: justify;
+        }
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 15px;
+        }
+        .report-content table th,
+        .report-content table td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .report-content table th {
+            background: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .report-content .cover-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .report-content .cover-info p {
+            text-indent: 0;
+            margin: 6px 0;
+            font-size: 16px;
+        }
+        .report-content .cover-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            margin: 40px 0 30px 0;
+            font-family: "黑体", "SimHei", sans-serif;
+        }
+        .report-content .cover-school {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin: 50px 0 20px 0;
+            font-family: "黑体", "SimHei", sans-serif;
+        }
+        .report-content .abstract-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0 15px 0;
+            font-family: "黑体", "SimHei", sans-serif;
+        }
+        .report-content .keyword {
+            margin: 10px 0;
+            text-indent: 0;
+        }
+        .report-content .keyword strong {
+            font-weight: bold;
+        }
+        .report-content .code-block {
+            background: #f5f5f5;
+            border-left: 3px solid #8b0000;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            text-indent: 0;
+            line-height: 1.5;
+        }
+        .report-content .toc {
+            margin: 10px 0 20px 0;
+        }
+        .report-content .toc p {
+            text-indent: 0;
+            margin: 4px 0;
+        }
+        .btn-download {
+            display: inline-block;
+            background: #8b0000;
+            color: #fff;
+            border: none;
+            padding: 14px 48px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: "黑体", "SimHei", sans-serif;
+            letter-spacing: 2px;
+            transition: background 0.3s;
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+        .btn-download:hover {
+            background: #a00000;
+        }
+        .btn-download:active {
+            transform: scale(0.98);
+        }
+        .btn-wrapper {
+            text-align: center;
+            margin: 10px 0 30px 0;
+        }
+        @media (max-width: 700px) {
+            .report-wrapper {
+                padding: 25px 20px;
+            }
+            .report-content {
+                font-size: 15px;
+            }
+            .report-content h1 {
+                font-size: 22px;
+            }
+            .report-content .cover-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 下载按钮 -->
+    <div class="btn-wrapper">
+        <button class="btn-download" onclick="downloadWord()">📥 下载 Word 文档</button>
+    </div>
+
+    <!-- 报告内容（将被导出到 Word） -->
+    <div class="report-wrapper">
+        <div class="report-content" id="reportContent">
+
+            <!-- 封面 -->
+            <div class="cover-school">河北科技大学</div>
+            <div class="cover-title">实习实践报告</div>
+            <div class="cover-info">
+                <p><strong>学生姓名：</strong>XXX</p>
+                <p><strong>学&emsp;&emsp;号：</strong>XXXXXXXX</p>
+                <p><strong>专业班级：</strong>计算机科学与技术XXXX班</p>
+                <p><strong>实习类别：</strong>认识实习</p>
+                <p><strong>实习方式：</strong>分散实习</p>
+                <p><strong>实习单位：</strong>河北科技大学</p>
+                <p><strong>指导教师：</strong>XXX</p>
+                <p><strong>实习时间：</strong>第8周到第9周，共2周</p>
+                <p><strong>所属学院：</strong>信息科学与工程学院</p>
+            </div>
+
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;">
+
+            <!-- 摘要 -->
+            <div class="abstract-title">摘&emsp;要</div>
+            <p>本报告以“红色信仰主题网页”为例，总结本次 Web 开发实践课程的完整开发过程。网页采用 HTML5 与 CSS3 实现，围绕“以史为鉴，信仰永续”的主题，设计了标题区、百年征程时间线、重大历史事件、红色精神谱系、信仰的践行者五个内容板块。页面采用暖色调与楷体字体搭配，营造庄重、肃穆的视觉氛围。开发中重点处理了跨浏览器兼容、内容排版对齐、边框与背景样式一致性问题，并实践了“先结构、后样式、再微调”的开发流程。通过本项目，我掌握了 HTML 语义化标签与 CSS 盒模型、浮动与 Flex 布局的基本用法，也认识到纯静态网页在数据动态性、可维护性方面的局限。</p>
+            <p class="keyword"><strong>关键词：</strong>HTML5；CSS3；静态网页；跨浏览器兼容；红色文化</p>
+
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;">
+
+            <!-- 目录 -->
+            <h2>目录</h2>
+            <div class="toc">
+                <p>1. 绪论</p>
+                <p>2. 需求分析与可行性分析</p>
+                <p>3. 系统设计</p>
+                <p>4. 系统实现</p>
+                <p>5. 部署与测试</p>
+                <p>6. 局限性分析与改进方向</p>
+                <p>7. 总结</p>
+                <p>8. 参考文献</p>
+                <p>9. 附录</p>
+            </div>
+
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;">
+
+            <!-- 一、绪论 -->
+            <h2>一、绪论</h2>
+
+            <h3>（一）选题背景与意义</h3>
+            <p>红色文化是中国共产党领导人民在革命、建设、改革过程中形成的宝贵精神财富。在 Web 开发实践课程中，选择一个主题鲜明、内容结构清晰的静态网页项目，既能锻炼 HTML/CSS 基础能力，也能通过内容组织传递正向价值。</p>
+            <p>本选题“红色信仰主题网页”以党的百年历程为主线，通过时间线、历史事件、精神谱系、人物事迹等板块，将分散的历史知识点组织为可浏览、可阅读的网页内容。选题难度适中，适合在课程实践周期内单人独立完成，同时具备明确的功能与页面组成。</p>
+
+            <h3>（二）实践目标</h3>
+            <ol>
+                <li>掌握 HTML5 语义化标签的使用，能够搭建结构清晰、层次分明的页面骨架；</li>
+                <li>掌握 CSS3 选择器、盒模型、边框、背景、字体、浮动与 Flex 布局等核心样式技术；</li>
+                <li>理解并实践跨浏览器兼容的基本处理方法；</li>
+                <li>完成一个主题明确、排版整齐、内容完整的静态网页作品；</li>
+                <li>通过开发过程记录与复盘，形成工程化思维与问题解决能力。</li>
+            </ol>
+
+            <!-- 二、需求分析与可行性分析 -->
+            <h2>二、需求分析与可行性分析</h2>
+
+            <h3>（一）需求分析</h3>
+            <p><strong>目标用户：</strong>对红色文化、党史知识感兴趣的学生、教师及普通浏览者。</p>
+            <p><strong>核心功能：</strong></p>
+            <ul>
+                <li>展示“以史为鉴，信仰永续”的主题标题区；</li>
+                <li>以时间线形式展示 1921、1949、1978、2012、2021 五个关键年份及对应历史事件；</li>
+                <li>展示“重大历史事件”板块，包括遵义会议、抗日战争胜利、改革开放；</li>
+                <li>展示“红色精神谱系”板块，包括井冈山精神、长征精神、延安精神、抗美援朝精神、改革开放精神、脱贫攻坚精神；</li>
+                <li>展示“信仰的践行者”板块，包括周恩来、焦裕禄、黄文秀三位人物事迹。</li>
+            </ul>
+            <p><strong>非功能需求：</strong></p>
+            <ul>
+                <li>页面在 Chrome、Edge、Firefox 等主流浏览器下布局正常；</li>
+                <li>文字可读性强，标题与正文层次分明；</li>
+                <li>页面结构清晰，便于后续内容扩展；</li>
+                <li>不涉及外部敏感数据，内容均来自公开历史资料。</li>
+            </ul>
+
+            <h3>（二）可行性分析</h3>
+            <p><strong>技术可行性：</strong>HTML5 + CSS3 是 Web 前端最基础的技术组合，学习门槛低、浏览器支持广泛，适合单人短周期完成。本项目中使用的浮动、Flex 布局、边框、背景色、字体设置等均为 CSS 标准特性，技术可行。</p>
+            <p><strong>资源与时间可行性：</strong>项目为纯静态网页，无需后端服务与数据库，开发时间可控。内容素材来自公开党史资料，获取成本低。</p>
+            <p><strong>约束考量：</strong></p>
+            <ul>
+                <li><strong>跨浏览器兼容：</strong>使用标准 CSS 属性，避免过度依赖实验性特性；对浮动与 Flex 布局在不同浏览器下的表现进行验证。</li>
+                <li><strong>性能约束：</strong>页面为纯静态资源，无外部图片与脚本，加载速度快。</li>
+                <li><strong>合规伦理：</strong>内容均为公开历史资料，不涉及侵权与敏感信息。</li>
+                <li><strong>AI 工具使用边界：</strong>本次开发中未使用 AI 工具生成核心代码，样式调整与问题排查由本人独立完成。</li>
+            </ul>
+            <p><strong>风险评估：</strong></p>
+            <ul>
+                <li>风险一：浮动布局在内容宽度过大时可能导致换行异常。应对：控制容器宽度，必要时改用 Flex 布局。</li>
+                <li>风险二：不同浏览器默认字体与边距不一致。应对：显式设置字体与盒模型，减少默认样式影响。</li>
+            </ul>
+
+            <!-- 三、系统设计 -->
+            <h2>三、系统设计</h2>
+
+            <h3>（一）系统总体架构</h3>
+            <p>本项目为纯静态网页，采用“单页面 + 分区展示”的结构。页面自上而下分为：</p>
+            <ol>
+                <li><strong>标题区</strong>（<code>.hajimi</code>）：展示“以史为鉴，信仰永续”主标题；</li>
+                <li><strong>时间线区</strong>（<code>.father</code>）：展示五个关键年份及事件说明；</li>
+                <li><strong>重大历史事件区</strong>（<code>.wang.wang-center</code>）：展示三个历史事件；</li>
+                <li><strong>红色精神谱系区</strong>（<code>.wang</code>）：展示六种红色精神；</li>
+                <li><strong>信仰的践行者区</strong>：展示三位人物事迹。</li>
+            </ol>
+
+            <h3>（二）页面结构</h3>
+            <div class="code-block">红色信仰主题网页
+├── 标题区（.hajimi）
+│   ├── 以史为鉴
+│   └── 信仰永续
+├── 百年征程，初心如磐（.fubiao）
+│   └── 时间线（.father × 5）
+├── 重大历史事件（.fubiao）
+│   └── .wang.wang-center
+├── 红色精神谱系（.fubiao）
+│   └── .wang
+└── 信仰的践行者（.fubiao）
+    └── .wang</div>
+
+            <h3>（三）模块设计</h3>
+            <table>
+                <thead>
+                    <tr><th>模块</th><th>主要功能</th><th>使用样式</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>标题区</td><td>展示主标题，营造庄重氛围</td><td>深红背景、黄色楷体大字</td></tr>
+                    <tr><td>时间线区</td><td>按年份展示历史事件</td><td>左边框、红色字体</td></tr>
+                    <tr><td>重大历史事件区</td><td>展示三个历史事件，内容居中</td><td>Flex 居中布局</td></tr>
+                    <tr><td>红色精神谱系区</td><td>展示六种红色精神</td><td>浮动布局、背景色区分</td></tr>
+                    <tr><td>信仰的践行者区</td><td>展示三位人物事迹</td><td>浮动布局、背景色区分</td></tr>
+                </tbody>
+            </table>
+
+            <h3>（四）技术选型</h3>
+            <ul>
+                <li><strong>HTML5：</strong>用于搭建页面结构，使用 <code>div</code>、<code>h1</code>、<code>h3</code>、<code>p</code> 等标签组织内容。</li>
+                <li><strong>CSS3：</strong>用于页面样式设计，包括盒模型、边框、背景、字体、浮动、Flex 布局。</li>
+                <li><strong>开发工具：</strong>VS Code。</li>
+                <li><strong>版本管理：</strong>Git（本地仓库）。</li>
+                <li><strong>部署方式：</strong>本地浏览器直接打开，未进行线上部署。</li>
+            </ul>
+            <p>选型理由：HTML + CSS 是 Web 开发的基础，适合本次课程实践的目标定位；VS Code 轻量易用；Git 用于记录开发过程。</p>
+
+            <!-- 四、系统实现 -->
+            <h2>四、系统实现</h2>
+
+            <h3>（一）环境搭建</h3>
+            <ul>
+                <li>操作系统：Windows 11</li>
+                <li>开发工具：VS Code</li>
+                <li>浏览器：Chrome / Edge</li>
+                <li>版本管理：Git</li>
+            </ul>
+
+            <h3>（二）页面结构实现</h3>
+            <p>页面使用 <code>div</code> 作为主要容器，按内容板块划分结构。标题区使用 <code>.hajimi</code> 类，时间线使用 <code>.father</code> 类，历史事件与精神谱系使用 <code>.wang</code> 容器，内部用 <code>.jia</code> 与 <code>.qing</code> 区分小标题与正文。</p>
+
+            <h3>（三）样式实现要点</h3>
+            <p><strong>1. 标题区样式</strong></p>
+            <div class="code-block">.hajimi {
+    background-color: rgb(90, 5, 5);
+    height: 250px;
+    border-style: solid;
+    border-width: 0 0 0 8px;
+    color: rgb(235, 22, 22);
+}
+.biaoti {
+    color: rgb(231, 231, 40);
+    font-family: kaiti;
+    font-size: 50px;
+}</div>
+            <p>深红背景搭配黄色楷体大字，形成庄重、醒目的视觉效果。</p>
+
+            <p><strong>2. 时间线样式</strong></p>
+            <div class="code-block">.father > p {
+    font-size: 25px;
+    color: red;
+    border-style: solid;
+    border-width: 0 0 0 8px;
+}</div>
+            <p>通过左侧粗边框形成时间线的视觉引导。</p>
+
+            <p><strong>3. 重大历史事件居中处理</strong></p>
+            <div class="code-block">.wang-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.wang-center .jia,
+.wang-center .qing {
+    float: none;
+    width: 80%;
+    max-width: 800px;
+}</div>
+            <p>使用 Flex 布局替代浮动，使内容水平居中，解决了浮动元素无法直接居中容器的问题。</p>
+
+            <p><strong>4. 精神谱系与人物板块</strong></p>
+            <div class="code-block">.jia {
+    width: 6000px;
+    height: 50px;
+    float: left;
+    color: rgb(152, 27, 27);
+}
+.qing {
+    width: 6000px;
+    height: 100px;
+    float: left;
+    overflow: hidden;
+}</div>
+            <p>使用浮动实现小标题与正文的纵向排列，通过背景色区分内容块。</p>
+
+            <h3>（四）开发中遇到的问题与解决</h3>
+            <table>
+                <thead>
+                    <tr><th>问题</th><th>原因分析</th><th>解决方式</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>重大历史事件板块内容无法居中</td><td><code>.jia</code> 与 <code>.qing</code> 设置了 <code>float: left</code> 和固定宽度 6000px</td><td>为该板块单独添加 <code>.wang-center</code> 类，使用 Flex 布局并取消浮动</td></tr>
+                    <tr><td>部分元素边框样式不生效</td><td><code>border-height</code> 不是合法 CSS 属性</td><td>改为 <code>border-width</code>，修正写法</td></tr>
+                    <tr><td>内容宽度过大导致布局异常</td><td>固定宽度 6000px 超出视口</td><td>在居中板块中改用 <code>width: 80%; max-width: 800px</code></td></tr>
+                </tbody>
+            </table>
+
+            <!-- 五、部署与测试 -->
+            <h2>五、部署与测试</h2>
+
+            <h3>（一）部署方式</h3>
+            <p>本项目为纯静态网页，未进行线上部署，直接在本地浏览器中打开 <code>www.html</code> 文件即可访问。后续可将文件上传至静态托管平台（如 Gitee Pages、Netlify 等）实现在线访问。</p>
+
+            <h3>（二）功能测试</h3>
+            <table>
+                <thead>
+                    <tr><th>测试项</th><th>测试内容</th><th>结果</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>页面加载</td><td>浏览器打开文件，页面正常显示</td><td>通过</td></tr>
+                    <tr><td>标题显示</td><td>“以史为鉴，信仰永续”正常显示</td><td>通过</td></tr>
+                    <tr><td>时间线</td><td>五个年份及事件正常展示</td><td>通过</td></tr>
+                    <tr><td>重大历史事件</td><td>内容居中显示</td><td>通过</td></tr>
+                    <tr><td>红色精神谱系</td><td>六种精神正常展示</td><td>通过</td></tr>
+                    <tr><td>信仰的践行者</td><td>三位人物事迹正常展示</td><td>通过</td></tr>
+                </tbody>
+            </table>
+
+            <h3>（三）兼容性与性能分析</h3>
+            <ul>
+                <li><strong>兼容性：</strong>在 Chrome、Edge 下测试布局正常；使用的 CSS 属性均为标准属性，Firefox 下预期兼容。</li>
+                <li><strong>性能：</strong>页面无外部图片与脚本，资源体积小，加载速度快。</li>
+            </ul>
+
+            <!-- 六、局限性分析与改进方向 -->
+            <h2>六、局限性分析与改进方向</h2>
+
+            <h3>（一）技术局限性</h3>
+            <ol>
+                <li><strong>纯静态网页：</strong>内容写死在 HTML 中，更新内容需要直接修改代码，维护成本高。</li>
+                <li><strong>浮动布局的局限：</strong>浮动布局在内容宽度变化时容易出现换行、错位问题，Flex 与 Grid 布局更适合复杂排版。</li>
+                <li><strong>未使用框架：</strong>没有使用 Vue 等框架，页面交互能力有限，无法实现数据动态绑定与组件复用。</li>
+                <li><strong>未部署上线：</strong>目前只能在本地访问，未验证线上部署效果。</li>
+            </ol>
+
+            <h3>（二）改进方向</h3>
+            <ol>
+                <li>将内容抽取为 JSON 数据，使用 JavaScript 动态渲染，提高可维护性；</li>
+                <li>使用 Vue 3 + Vite 重构，实现组件化开发；</li>
+                <li>使用 Flex/Grid 全面替代浮动布局；</li>
+                <li>部署到静态托管平台，验证线上访问效果；</li>
+                <li>增加响应式设计，适配移动端浏览。</li>
+            </ol>
+
+            <!-- 七、总结 -->
+            <h2>七、总结</h2>
+            <p>通过本次 Web 开发实践，我完成了“红色信仰主题网页”的设计与实现，掌握了 HTML5 语义化标签、CSS3 盒模型、边框、背景、字体、浮动与 Flex 布局等核心技术，并实践了从需求分析、结构设计、样式实现到测试验证的完整流程。</p>
+            <p>开发过程中，我遇到了内容居中、边框样式不生效、固定宽度导致布局异常等问题，通过查阅资料、调整 CSS 写法、改用 Flex 布局等方式逐一解决。这些过程让我认识到：<strong>样式问题往往不是单一属性造成的，而是布局方式、宽度设置、浮动与定位共同作用的结果</strong>，排查时需要从整体结构入手。</p>
+            <p>同时，我也认识到纯静态网页在数据动态性、可维护性方面的不足，后续希望学习 Vue 框架与部署工具，将本项目升级为组件化、可部署的单页面应用。</p>
+
+            <!-- 八、参考文献 -->
+            <h2>八、参考文献</h2>
+            <ol>
+                <li>马文惠，王树平. Dreamweaver 网页制作（第 4 版）[M]. 北京：高等教育出版社，2021.</li>
+                <li>蔡冰. Vue.js 3 开发详解[M]. 北京：清华大学出版社，2023.</li>
+                <li>MDN Web Docs. Web 开发技术文档[EB/OL]. https://developer.mozilla.org/</li>
+                <li>Vue.js 官方文档[EB/OL]. https://vuejs.org/</li>
+            </ol>
+
+            <!-- 九、附录 -->
+            <h2>九、附录</h2>
+
+            <h3>附录A 核心代码片段</h3>
+            <div class="code-block">&lt;div class="hajimi"&gt;
+    &lt;div class="left-ha"&gt;&lt;h1 class="biaoti"&gt;以史为鉴&lt;/h1&gt;&lt;/div&gt;
+    &lt;div class="right-ji"&gt;&lt;h1 class="biaoti"&gt;信仰永续&lt;/h1&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 class="fubiao"&gt;重大历史事件&lt;/h1&gt;
+&lt;div class="wang wang-center"&gt;
+    &lt;div class="jia"&gt;&lt;h4&gt;遵义会议&lt;/h4&gt;&lt;/div&gt;
+    &lt;div class="qing"&gt;&lt;p&gt;1935年，遵义会议事实上确立了毛泽东同志在党中央和红军的领导地位……&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</div>
+
+            <h3>附录B 每日开发记录摘要</h3>
+            <table>
+                <thead>
+                    <tr><th>日期</th><th>当日任务</th><th>完成情况</th><th>问题与解决</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>第1天</td><td>HTML 结构搭建</td><td>完成</td><td>无</td></tr>
+                    <tr><td>第2天</td><td>CSS 基础样式</td><td>完成</td><td>边框属性写错，已修正</td></tr>
+                    <tr><td>第3天</td><td>时间线与事件板块</td><td>完成</td><td>内容居中问题，改用 Flex 解决</td></tr>
+                    <tr><td>第4天</td><td>精神谱系与人物板块</td><td>完成</td><td>浮动布局调整</td></tr>
+                    <tr><td>第5天</td><td>测试与报告撰写</td><td>完成</td><td>无</td></tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+        function downloadWord() {
+            // 获取报告内容的 HTML
+            var content = document.getElementById('reportContent').innerHTML;
+
+            // 构建完整的 Word 文档 HTML
+            // 使用 Word 兼容的 XML 命名空间和样式
+            var wordHtml = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office'
+                      xmlns:w='urn:schemas-microsoft-com:office:word'
+                      xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset="utf-8">
+                    <title>Web开发实践报告</title>
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <w:WordDocument>
+                            <w:View>Print</w:View>
+                            <w:Zoom>100</w:Zoom>
+                            <w:DoNotOptimizeForBrowser/>
+                        </w:WordDocument>
+                    </xml>
+                    <![endif]-->
+                    <style>
+                        /* Word 文档样式 */
+                        @page {
+                            size: A4;
+                            margin: 2.54cm 3.17cm;
+                        }
+                        body {
+                            font-family: "宋体", "SimSun", "Times New Roman", serif;
+                            font-size: 12pt;
+                            line-height: 1.8;
+                            color: #000;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        h1 {
+                            font-size: 18pt;
+                            text-align: center;
+                            font-weight: bold;
+                            font-family: "黑体", "SimHei", sans-serif;
+                            margin: 24pt 0 12pt 0;
+                            letter-spacing: 2pt;
+                        }
+                        h2 {
+                            font-size: 15pt;
+                            font-weight: bold;
+                            font-family: "黑体", "SimHei", sans-serif;
+                            margin: 20pt 0 10pt 0;
+                            border-bottom: 1pt solid #ccc;
+                            padding-bottom: 4pt;
+                        }
+                        h3 {
+                            font-size: 13pt;
+                            font-weight: bold;
+                            font-family: "黑体", "SimHei", sans-serif;
+                            margin: 16pt 0 8pt 0;
+                        }
+                        p {
+                            margin: 6pt 0;
+                            text-align: justify;
+                            text-indent: 2em;
+                            font-size: 12pt;
+                            line-height: 1.8;
+                        }
+                        p.no-indent {
+                            text-indent: 0;
+                        }
+                        ul, ol {
+                            margin: 6pt 0 6pt 2em;
+                            padding-left: 1.5em;
+                        }
+                        li {
+                            margin: 3pt 0;
+                            text-align: justify;
+                            font-size: 12pt;
+                            line-height: 1.8;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 12pt 0;
+                            font-size: 11pt;
+                        }
+                        table th, table td {
+                            border: 1pt solid #000;
+                            padding: 6pt 8pt;
+                            text-align: left;
+                            vertical-align: top;
+                        }
+                        table th {
+                            background: #f0f0f0;
+                            font-weight: bold;
+                            text-align: center;
+                        }
+                        .cover-school {
+                            font-size: 20pt;
+                            font-weight: bold;
+                            text-align: center;
+                            margin: 40pt 0 20pt 0;
+                            font-family: "黑体", "SimHei", sans-serif;
+                        }
+                        .cover-title {
+                            font-size: 28pt;
+                            font-weight: bold;
+                            text-align: center;
+                            margin: 30pt 0 40pt 0;
+                            font-family: "黑体", "SimHei", sans-serif;
+                        }
+                        .cover-info {
+                            text-align: center;
+                            margin: 20pt 0;
+                        }
+                        .cover-info p {
+                            text-indent: 0;
+                            margin: 5pt 0;
+                            font-size: 12pt;
+                        }
+                        .abstract-title {
+                            font-size: 16pt;
+                            font-weight: bold;
+                            text-align: center;
+                            margin: 24pt 0 12pt 0;
+                            font-family: "黑体", "SimHei", sans-serif;
+                        }
+                        .keyword {
+                            margin: 8pt 0;
+                            text-indent: 0;
+                            font-size: 12pt;
+                        }
+                        .keyword strong {
+                            font-weight: bold;
+                        }
+                        .code-block {
+                            background: #f5f5f5;
+                            border-left: 3pt solid #8b0000;
+                            padding: 8pt 12pt;
+                            margin: 8pt 0;
+                            font-family: "Consolas", "Courier New", monospace;
+                            font-size: 10.5pt;
+                            white-space: pre-wrap;
+                            word-break: break-all;
+                            text-indent: 0;
+                            line-height: 1.4;
+                        }
+                        .toc p {
+                            text-indent: 0;
+                            margin: 3pt 0;
+                            font-size: 12pt;
+                        }
+                        hr {
+                            border: none;
+                            border-top: 1pt solid #ccc;
+                            margin: 20pt 0;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                </body>
+                </html>
+            `;
+
+            // 创建 Blob 对象，使用正确的 MIME 类型
+            var blob = new Blob([wordHtml], {
+                type: 'application/msword;charset=utf-8'
+            });
+
+            // 创建下载链接
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'Web开发实践报告-红色信仰主题网页.doc';
+
+            // 触发下载
+            document.body.appendChild(link);
+            link.click();
+
+            // 清理
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+
+</body>
+</html>
