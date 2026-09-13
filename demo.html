@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国共产党与红色精神</title>
+    <style>
+        :root {
+            --red: #c8102e;
+            --deep-red: #7d0b1d;
+            --gold: #f7d77a;
+            --ink: #1d1d1f;
+            --muted: #666;
+            --bg: #f8f4f1;
+            --card: rgba(255,255,255,0.9);
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            color: var(--ink);
+            background: linear-gradient(180deg, #fff6f1 0%, #f5efe9 100%);
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(127, 11, 25, 0.9);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 3px 18px rgba(0,0,0,0.12);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 72px;
+            color: #fff;
+        }
+
+        .brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 0.98rem;
+        }
+
+        .nav-links a {
+            opacity: 0.92;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--deep-red) 0%, var(--red) 45%, #d43c3c 100%);
+            color: #fff;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border: 2px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+        }
+
+        .hero::before {
+            width: 420px;
+            height: 420px;
+            right: -90px;
+            top: -120px;
+        }
+
+        .hero::after {
+            width: 260px;
+            height: 260px;
+            left: -60px;
+            bottom: -80px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 999px;
+            padding: 8px 18px;
+            letter-spacing: 2px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 18px 0 16px;
+            font-size: clamp(2.3rem, 5vw, 4.3rem);
+            line-height: 1.15;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 620px;
+            font-size: 1.08rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 22px;
+            padding: 28px 24px;
+            box-shadow: 0 16px 34px rgba(0,0,0,0.14);
+        }
+
+        .hero-card h3 {
+            margin: 0 0 16px;
+            font-size: 1.2rem;
+        }
+
+        .hero-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 12px;
+            color: rgba(255,255,255,0.92);
+        }
+
+        .hero-list li::before {
+            content: "◆";
+            color: var(--gold);
+            margin-right: 10px;
+        }
+
+        section {
+            padding: 84px 0;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .section-head span {
+            color: var(--red);
+            font-size: 0.82rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .section-head h2 {
+            margin: 10px 0 0;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            color: var(--ink);
+        }
+
+        .story-grid,
+        .spirit-grid,
+        .history-grid {
+            display: grid;
+            gap: 28px;
+        }
+
+        .story-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 30px 26px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .card .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--red), #eb444d);
+            border-radius: 50%;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            margin: 0 0 12px;
+            font-size: 1.36rem;
+            color: var(--ink);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .spirit-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .spirit-item {
+            text-align: center;
+            padding: 32px 20px;
+            background: linear-gradient(180deg, #fff, #fff8f7);
+            border: 1px solid rgba(200,16,46,0.08);
+            border-radius: 20px;
+            box-shadow: 0 10px 18px rgba(125,11,29,0.04);
+        }
+
+        .spirit-item .icon {
+            width: 74px;
+            height: 74px;
+            margin: 0 auto 18px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #f8d98d, #c8102e);
+            color: #fff;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 18px rgba(200,16,46,0.18);
+        }
+
+        .spirit-item h3 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .spirit-item p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.97rem;
+        }
+
+        .history-grid {
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+        }
+
+        .timeline {
+            background: #fff;
+            border-radius: 22px;
+            padding: 28px 26px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--red);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 24px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -11px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(247,215,122,0.25);
+        }
+
+        .timeline-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        .quote {
+            background: linear-gradient(150deg, #4b0e18, #8a1629 45%, #c8102e 100%);
+            color: #fff;
+            border-radius: 22px;
+            padding: 34px 26px;
+            box-shadow: 0 18px 30px rgba(93, 15, 27, 0.2);
+        }
+
+        .quote p {
+            margin: 0;
+            font-size: 1.08rem;
+            line-height: 1.9;
+        }
+
+        .cta {
+            background: linear-gradient(180deg, #fdf7f4, #f7efe8);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #fff, #f7f1f1);
+            border-radius: 24px;
+            border: 1px solid rgba(200,16,46,0.08);
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 16px 30px rgba(0,0,0,0.05);
+        }
+
+        .cta-box h2 {
+            margin: 0 0 14px;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+        }
+
+        .cta-box p {
+            margin: 0 auto 22px;
+            max-width: 720px;
+            color: var(--muted);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--red), #d22c46);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 12px 24px rgba(200,16,46,0.2);
+        }
+
+        footer {
+            background: #1c1c1f;
+            color: rgba(255,255,255,0.8);
+            padding: 28px 0;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 860px) {
+            .hero-content,
+            .story-grid,
+            .spirit-grid,
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                flex-direction: column;
+                justify-content: center;
+                padding: 14px 0;
+                gap: 10px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px 18px;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="container nav">
+            <div class="brand">中国共产党</div>
+            <nav class="nav-links">
+                <a href="#about">党史概览</a>
+                <a href="#spirit">红色精神</a>
+                <a href="#history">光辉历程</a>
+                <a href="#mission">初心使命</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <div>
+                    <div class="eyebrow">初心与使命</div>
+                    <h1>中国共产党<br>与红色精神</h1>
+                    <p>
+                        中国共产党从诞生到今天，始终以人民为中心，团结一代又一代中国人，在艰苦卓绝的斗争中书写壮丽篇章，铸就了伟大的红色精神。
+                    </p>
+                </div>
+
+                <div class="hero-card">
+                    <h3>红色精神的核心</h3>
+                    <ul class="hero-list">
+                        <li>为人民谋幸福</li>
+                        <li>敢于斗争、勇于胜利</li>
+                        <li>艰苦奋斗、勤俭建国</li>
+                        <li>不忘初心、牢记使命</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="section-head">
+                    <span>党的诞生</span>
+                    <h2>从斗争中走来</h2>
+                </div>
+                <div class="story-grid">
+                    <article class="card">
+                        <div class="num">01</div>
+                        <h3>初心</h3>
+                        <p>中国共产党成立的初心，是为中国人民谋幸福、为中华民族谋复兴，解决国家富强与人民解放的重大命题。</p>
+                    </article>
+                    <article class="card">
+                        <div class="num">02</div>
+                        <h3>奋斗</h3>
+                        <p>在土地革命、抗日战争、新中国成立和社会主义建设的艰难年代，党带领人民克服重重困难，走出中国道路。</p>
+                    </article>
+                    <article class="card">
+                        <div class="num">03</div>
+                        <h3>担当</h3>
+                        <p>无论时代如何变化，始终坚持以人民利益为重，推动国家发展、民族振兴和社会进步，体现党的责任担当。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="spirit">
+            <div class="container">
+                <div class="section-head">
+                    <span>精神内涵</span>
+                    <h2>红色精神的时代价值</h2>
+                </div>
+                <div class="spirit-grid">
+                    <article class="spirit-item">
+                        <div class="icon">🔥</div>
+                        <h3>坚定信念</h3>
+                        <p>对理想信念的执着追求，是共产党人前进的力量源泉。</p>
+                    </article>
+                    <article class="spirit-item">
+                        <div class="icon">🛡</div>
+                        <h3>为民服务</h3>
+                        <p>把人民利益放在心中，把人民幸福作为一切工作的出发点。</p>
+                    </article>
+                    <article class="spirit-item">
+                        <div class="icon">⚔</div>
+                        <h3>敢于斗争</h3>
+                        <p>面对困难和挑战，始终保持昂扬斗志和必胜信心。</p>
+                    </article>
+                    <article class="spirit-item">
+                        <div class="icon">🌄</div>
+                        <h3>艰苦奋斗</h3>
+                        <p>以勤劳、奉献和牺牲的精神推进改革与建设。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="history">
+            <div class="container">
+                <div class="section-head">
+                    <span>光辉历程</span>
+                    <h2>红色足迹，薪火相传</h2>
+                </div>
+                <div class="history-grid">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <strong>1921年</strong>
+                            中国共产党成立，开启了中国革命和建设的新篇章。
+                        </div>
+                        <div class="timeline-item">
+                            <strong>长征</strong>
+                            红军跨越天险，展示了坚韧不拔、团结协作的革命精神。
+                        </div>
+                        <div class="timeline-item">
+                            <strong>抗战时期</strong>
+                            党团结全国人民，以民族大义抵御外敌，赢得抗战胜利。
+                        </div>
+                        <div class="timeline-item">
+                            <strong>新中国成立</strong>
+                            党带领人民实现国家独立和人民解放，开创社会主义事业新局面。
+                        </div>
+                    </div>
+
+                    <aside class="quote">
+                        <p>
+                            “没有共产党就没有新中国。”<br>
+                            这句话，是对党领导人民创造历史伟业的深刻概括，也是红色精神永恒的写照。
+                        </p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" id="mission">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>传承红色基因，担负时代重任</h2>
+                    <p>
+                        红色精神不是过去的记忆，而是今天前进的力量。我们要牢记历史、珍惜今天、勇担未来，在实现中华民族伟大复兴的征程上不断前行。
+                    </p>
+                    <a class="btn" href="#top">继续追寻初心</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        以人民为中心 · 奋斗创造未来 · 传承红色精神
+    </footer>
+</body>
+</html>
